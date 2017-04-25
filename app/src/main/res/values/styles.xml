@@ -8,6 +8,13 @@
         <item name="android:windowEnterAnimation">@anim/splash_fade_in</item>
         <item name="android:windowExitAnimation">@anim/splash_fade_out</item>
     </style>
+    <style name="home_color_shopping_button">
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@mipmap/color_shopping_button_bg</item>
+        <item name="android:padding">0.0dip</item>
+        <item name="android:layout_height">40.0dip</item>
+    </style>
 <!--
     <style name="home_tab_bottom">
         <item name="android:gravity">center</item>
