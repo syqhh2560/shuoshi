@@ -27,10 +27,9 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.day.shoushi.R;
-import com.tangcco.jd.adapter.IndexGalleryAdapter;
-import com.tangcco.jd.entity.IndexGalleryItemData;
-import com.tangcco.jd.ui.base.BaseActivity;
-import com.tangcco.jd.utils.CommonTools;
+import com.day.shoushi.adapter.IndexGalleryAdapter;
+import com.day.shoushi.entity.IndexGalleryItemData;
+import com.day.shoushi.utils.CommonTools;
 import com.tangcco.jd.widgets.HomeSearchBarPopupWindow;
 import com.tangcco.jd.widgets.HomeSearchBarPopupWindow.onSearchBarItemClickListener;
 import com.tangcco.jd.widgets.jazzviewpager.JazzyViewPager;
