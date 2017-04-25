@@ -1,4 +1,4 @@
-package com.day.shoushi.util;
+package com.day.shoushi.utils;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class NetworkUtils {
     /**
      * 网络是否可用
      *
-     * @param activity
+     * @param context
      * @return
      */
     public static boolean isNetworkAvailable(Context context) {

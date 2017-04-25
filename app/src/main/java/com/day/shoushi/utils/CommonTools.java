@@ -1,4 +1,4 @@
-package com.day.shoushi.util;
+package com.day.shoushi.utils;
 
 import android.content.Context;
 import android.view.Gravity;
