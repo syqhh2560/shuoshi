@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-<!--
+
     <LinearLayout
         android:id="@+id/index_top_layout"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@drawable/search_box"
-            android:drawableRight="@drawable/app_icon_voice"
+            android:drawableRight="@mipmap/app_icon_voice"
             android:hint="@string/index_search_edit_hint"
             android:padding="6dp"
             android:textColor="@color/darkgray"
@@ -41,15 +41,15 @@
             android:background="@drawable/app_home_title_r_button_selector"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:src="@drawable/android_search_button_icon" />
+            android:src="@mipmap/android_search_button_icon" />
     </LinearLayout>
-    android:layout_below="@id/index_top_layout"
-    -->
+
+
 
     <com.day.shoushi.myview.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_below="@id/index_top_layout"
         android:background="@drawable/home_myscrollview_background"
         android:fadingEdge="none"
         android:fadingEdgeLength="0dp"

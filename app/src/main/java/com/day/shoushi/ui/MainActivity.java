@@ -25,14 +25,14 @@ public class MainActivity extends BaseFragment {
 	public static final String TAB_MORE = "more";
 
 	private TextView mHomeTab;
-	private TextView mYugaoTab;
+	private TextView mYuGaoTab;
 	private TextView mMoreTab;
 
 
 	private Drawable mHomePressed;
 	private Drawable mHomeNormal;
-	private Drawable mYugaoPressed;
-	private Drawable mYugaoNormal;
+	private Drawable mYuGaoPressed;
+	private Drawable mYuGaoNormal;
 	private Drawable mMorePressed;
 	private Drawable mMoreNormal;
 
@@ -60,7 +60,7 @@ public class MainActivity extends BaseFragment {
 		indicator = getIndicatorView(TAB_YUGAO);
 		mTabHost.addTab(
 				mTabHost.newTabSpec(TAB_YUGAO).setIndicator(indicator),
-				ZiLiaoFragment.class, null);
+				YuGaoFragment.class, null);
 
 //		indicator = getIndicatorView(TAB_MORE);
 //		mTabHost.addTab(mTabHost.newTabSpec(TAB_MORE).setIndicator(indicator),
@@ -72,23 +72,23 @@ public class MainActivity extends BaseFragment {
 //
 		indicator = getIndicatorView(TAB_MORE);
 		mTabHost.addTab(mTabHost.newTabSpec(TAB_MORE).setIndicator(indicator),
-				SettingFragment.class, null);
+				MoreFragment.class, null);
 //
 		// mUnread = (TextView) findViewById(R.id.unread);
 //
 		mTabHost.getTabWidget().setDividerDrawable(null);
 
 		mTabHost.setOnTabChangedListener(listener);
-		listener.onTabChanged(TAB_MESSAGE);
+		listener.onTabChanged(TAB_HOME);
 
-		mTabHost.getTabWidget().getChildTabViewAt(2)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-
-						showPop();
-					}
-				});
+//		mTabHost.getTabWidget().getChildTabViewAt(2)
+//				.setOnClickListener(new View.OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//
+//						showPop();
+//					}
+//				});
 //		bgView = new BadgeView(this, mMessageTab);
 	}
 
@@ -102,141 +102,100 @@ public class MainActivity extends BaseFragment {
 //				Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
 //	}
 //
-//	TabHost.OnTabChangeListener listener = new TabHost.OnTabChangeListener() {
-//		@Override
-//		public void onTabChanged(String tabId) {
-//			if (TAB_MESSAGE.equals(tabId)) {
-//				setMessageText(true);
-//				setZiLiaoText(false);
-//				setHuiYiText(false);
-//				setMoreText(false);
-//				return;
-//			}
-//			if (TAB_ZILIAO.equals(tabId)) {
-//				setMessageText(false);
-//				setZiLiaoText(true);
-//				setHuiYiText(false);
-//				setMoreText(false);
-//				return;
-//			}
-//			if (TAB_HUIYI.equals(tabId)) {
-//				setMessageText(false);
-//				setZiLiaoText(false);
-//				setHuiYiText(true);
-//				setMoreText(false);
-//				return;
-//			}
-//			if (TAB_MORE.equals(tabId)) {
-//				setMessageText(false);
-//				setZiLiaoText(false);
-//				setHuiYiText(false);
-//				setMoreText(true);
-//				return;
-//			}
-//		}
-//	};
+	TabHost.OnTabChangeListener listener = new TabHost.OnTabChangeListener() {
+		@Override
+		public void onTabChanged(String tabId) {
+			if (TAB_HOME.equals(tabId)) {
+				setHomeText(true);
+				setYuGaoText(false);
+				setMoreText(false);
+				//setMoreText(false);
+				return;
+			}
+			if (TAB_YUGAO.equals(tabId)) {
+				setHomeText(false);
+				setYuGaoText(true);
+				setMoreText(false);
+				//setMoreText(false);
+				return;
+			}
+
+			if (TAB_MORE.equals(tabId)) {
+				setHomeText(false);
+				setYuGaoText(false);
+				setMoreText(true);
+				return;
+			}
+		}
+	};
 ////	private int count = 0;
 ////    private int firClick = 0;
 ////    private int secClick = 0;
 ////    private int flage = 0;
 //
-//	private View getIndicatorView(String tab) {
-//		View tabView = View.inflate(this, R.layout.main_tab_item, null);
-//		TextView indicator = (TextView) tabView.findViewById(R.id.tab_text);
-//		Drawable drawable;
+	private View getIndicatorView(String tab) {
+		View tabView = View.inflate(this, R.layout.main_tab_item, null);
+		TextView indicator = (TextView) tabView.findViewById(R.id.tab_text);
+		Drawable drawable;
+
+		if (tab.equals(TAB_HOME)) {
+			indicator.setText("首页");
+			drawable = getResources().getDrawable(
+					R.mipmap.tab_icon_home_normal);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			indicator.setCompoundDrawables(null, drawable, null, null);
+			mHomeTab = indicator;
+		} else if (tab.equals(TAB_YUGAO)) {
+			indicator.setText("预告");
+			drawable = getResources().getDrawable(
+					R.mipmap.tab_icon_home_normal);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			indicator.setCompoundDrawables(null, drawable, null, null);
+			mYuGaoTab = indicator;
+		} else if (tab.equals(TAB_MORE)) {
+			indicator.setText("设置");
+			drawable = getResources().getDrawable(
+					R.mipmap.tab_icon_setting_normal);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			indicator.setCompoundDrawables(null, drawable, null, null);
+			mMoreTab = indicator;
+		}
+		return tabView;
+	}
 //
-//		if (tab.equals(TAB_MESSAGE)) {
-//			indicator.setText("首页");
-//			drawable = getResources().getDrawable(
-//					R.drawable.tab_icon_message_normal);
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			indicator.setCompoundDrawables(null, drawable, null, null);
-//			mMessageTab = indicator;
-////			count++;
-////            if(count == 1){
-////                firClick = (int) System.currentTimeMillis();
-////
-////            } else if (count == 2){
-////                secClick = (int) System.currentTimeMillis();
-////                if(secClick - firClick < 1000){
-////                       //双击事件
-////                	HomeFragment.selectAllProducts();
-////                }
-////                count = 0;
-////                firClick = 0;
-////                secClick = 0;
-////            }
-//		} else if (tab.equals(TAB_ZILIAO)) {
-//			indicator.setText("资料");
-//			drawable = getResources().getDrawable(
-//					R.drawable.tab_icon_message_normal);
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			indicator.setCompoundDrawables(null, drawable, null, null);
-//			mZiLiaoTab = indicator;
-//		} else if (tab.equals(TAB_HUIYI)) {
-//			indicator.setText("会议");
-//			drawable = getResources().getDrawable(
-//					R.drawable.tab_icon_message_normal);
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			indicator.setCompoundDrawables(null, drawable, null, null);
-//			mHuiyiTab = indicator;
-//		} else if (tab.equals(TAB_SEND)) {
-//
-//			View tabView_s = View.inflate(this, R.layout.main_tab_item_s, null);
-//			// TextView indicato_sr = (TextView) tabView_s
-//			// .findViewById(R.id.tab_text_s);
-//			// Drawable d = getResources().getDrawable(
-//			// R.drawable.tabbar_compose_icon_add_highlighted);
-//			// d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-//			// indicato_sr.setCompoundDrawables(null, d, null, null);
-//
-//			return tabView_s;
-//
-//		} else if (tab.equals(TAB_MORE)) {
-//			indicator.setText("设置");
-//			drawable = getResources().getDrawable(
-//					R.drawable.tab_icon_setting_normal);
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			indicator.setCompoundDrawables(null, drawable, null, null);
-//			mMoreTab = indicator;
-//		}
-//		return tabView;
-//	}
-//
-//	private void setMessageText(boolean isSelected) {
+	private void setHomeText(boolean isSelected) {
+		Drawable drawable = null;
+		if (isSelected) {
+			mHomeTab.setTextColor(getResources().getColor(
+					R.color.tab_pressed_color));
+			if (mHomePressed == null) {
+				mHomePressed = getResources().getDrawable(
+						R.mipmap.tab_icon_home_pressed);
+			}
+			drawable = mHomePressed;
+		} else {
+			mHomeTab.setTextColor(getResources().getColor(
+					R.color.tab_normal_color));
+			if (mHomeNormal == null) {
+				mHomeNormal = getResources().getDrawable(
+						R.mipmap.tab_icon_home_normal);
+			}
+			drawable = mHomeNormal;
+		}
+		if (drawable != null) {
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			mHomeTab.setCompoundDrawables(null, drawable, null, null);
+		}
+	}
+
+//	private void setYuGaoText(boolean isSelected) {
 //		Drawable drawable = null;
 //		if (isSelected) {
-//			mMessageTab.setTextColor(getResources().getColor(
-//					R.color.tab_pressed_color));
-//			if (mMessagePressed == null) {
-//				mMessagePressed = getResources().getDrawable(
-//						R.drawable.tab_icon_message_pressed);
-//			}
-//			drawable = mMessagePressed;
-//		} else {
-//			mMessageTab.setTextColor(getResources().getColor(
-//					R.color.tab_normal_color));
-//			if (mMessageNormal == null) {
-//				mMessageNormal = getResources().getDrawable(
-//						R.drawable.tab_icon_message_normal);
-//			}
-//			drawable = mMessageNormal;
-//		}
-//		if (drawable != null) {
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			mMessageTab.setCompoundDrawables(null, drawable, null, null);
-//		}
-//	}
-//
-//	private void setZiLiaoText(boolean isSelected) {
-//		Drawable drawable = null;
-//		if (isSelected) {
-//			mZiLiaoTab.setTextColor(getResources().getColor(
+//			mYuGaoTab.setTextColor(getResources().getColor(
 //					R.color.tab_pressed_color));
 //			if (mZiLiaoPressed == null) {
 //				mZiLiaoPressed = getResources().getDrawable(
@@ -244,7 +203,7 @@ public class MainActivity extends BaseFragment {
 //			}
 //			drawable = mZiLiaoPressed;
 //		} else {
-//			mZiLiaoTab.setTextColor(getResources().getColor(
+//			mYuGaoTab.setTextColor(getResources().getColor(
 //					R.color.tab_normal_color));
 //			if (mZiLiaoNormal == null) {
 //				mZiLiaoNormal = getResources().getDrawable(
@@ -258,58 +217,58 @@ public class MainActivity extends BaseFragment {
 //			mZiLiaoTab.setCompoundDrawables(null, drawable, null, null);
 //		}
 //	}
-//	private void setHuiYiText(boolean isSelected) {
-//		Drawable drawable = null;
-//		if (isSelected) {
-//			mHuiyiTab.setTextColor(getResources().getColor(
-//					R.color.tab_pressed_color));
-//			if (mHuiYiPressed == null) {
-//				mHuiYiPressed = getResources().getDrawable(
-//						R.drawable.tab_icon_huiyi_pressed);
-//			}
-//			drawable = mHuiYiPressed;
-//		} else {
-//			mHuiyiTab.setTextColor(getResources().getColor(
-//					R.color.tab_normal_color));
-//			if (mHuiYiNormal == null) {
-//				mHuiYiNormal = getResources().getDrawable(
-//						R.drawable.tab_icon_huiyi_normal);
-//			}
-//			drawable = mHuiYiNormal;
-//		}
-//		if (null != drawable) {// 此处出现过NP问题，加保护
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			mHuiyiTab.setCompoundDrawables(null, drawable, null, null);
-//		}
-//
-//	}
-//	private void setMoreText(boolean isSelected) {
-//		Drawable drawable = null;
-//		if (isSelected) {
-//			mMoreTab.setTextColor(getResources().getColor(
-//					R.color.tab_pressed_color));
-//			if (mMorePressed == null) {
-//				mMorePressed = getResources().getDrawable(
-//						R.drawable.tab_icon_setting_pressed);
-//			}
-//			drawable = mMorePressed;
-//		} else {
-//			mMoreTab.setTextColor(getResources().getColor(
-//					R.color.tab_normal_color));
-//			if (mMoreNormal == null) {
-//				mMoreNormal = getResources().getDrawable(
-//						R.drawable.tab_icon_setting_normal);
-//			}
-//			drawable = mMoreNormal;
-//		}
-//		if (null != drawable) {// 此处出现过NP问题，加保护
-//			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
-//					drawable.getIntrinsicHeight());
-//			mMoreTab.setCompoundDrawables(null, drawable, null, null);
-//		}
-//
-//	}
+	private void setYuGaoText(boolean isSelected) {
+		Drawable drawable = null;
+		if (isSelected) {
+			mYuGaoTab.setTextColor(getResources().getColor(
+					R.color.tab_pressed_color));
+			if (mYuGaoPressed == null) {
+				mYuGaoPressed = getResources().getDrawable(
+						R.mipmap.tab_icon_huiyi_pressed);
+			}
+			drawable = mYuGaoPressed;
+		} else {
+			mYuGaoTab.setTextColor(getResources().getColor(
+					R.color.tab_normal_color));
+			if (mYuGaoNormal == null) {
+				mYuGaoNormal = getResources().getDrawable(
+						R.mipmap.tab_icon_huiyi_normal);
+			}
+			drawable = mYuGaoNormal;
+		}
+		if (null != drawable) {// 此处出现过NP问题，加保护
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			mYuGaoTab.setCompoundDrawables(null, drawable, null, null);
+		}
+
+	}
+	private void setMoreText(boolean isSelected) {
+		Drawable drawable = null;
+		if (isSelected) {
+			mMoreTab.setTextColor(getResources().getColor(
+					R.color.tab_pressed_color));
+			if (mMorePressed == null) {
+				mMorePressed = getResources().getDrawable(
+						R.mipmap.tab_icon_setting_pressed);
+			}
+			drawable = mMorePressed;
+		} else {
+			mMoreTab.setTextColor(getResources().getColor(
+					R.color.tab_normal_color));
+			if (mMoreNormal == null) {
+				mMoreNormal = getResources().getDrawable(
+						R.mipmap.tab_icon_setting_normal);
+			}
+			drawable = mMoreNormal;
+		}
+		if (null != drawable) {// 此处出现过NP问题，加保护
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			mMoreTab.setCompoundDrawables(null, drawable, null, null);
+		}
+
+	}
 //
 //	@Override
 //	protected void onStart() {
